@@ -52,3 +52,9 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Node Modules
+node_modules/
+
+# Environment variables
+*.env
