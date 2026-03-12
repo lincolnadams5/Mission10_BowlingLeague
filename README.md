@@ -61,16 +61,16 @@ The page displays a table of all bowlers in the league, including their team nam
 Mission10_BowlingLeague/
 ├── backend/
 │   ├── Controllers/        # BowlersController — GET /api/bowlers
-│   ├── Data/               # EF Core DbContext
-│   ├── Models/             # Bowler and Team models
-│   ├── data/               # BowlingLeague.sqlite (included)
+│   ├── Models/             # Bowler, Teams models and EF Core DbContext
+│   ├── BowlingLeague.sqlite  # SQLite database (included)
 │   └── Program.cs          # App configuration, CORS, DB connection
 └── frontend/
     ├── src/
     │   ├── components/     # BowlerTable, Heading, Footer
     │   ├── services/       # bowlerApi.ts — fetch logic
     │   └── types/          # Bowler TypeScript type
-    └── .env                # API URL (pre-configured)
+    ├── .env                # API URL (pre-configured)
+    └── .env.example        # Template if .env needs to be recreated
 ```
 
 ---
