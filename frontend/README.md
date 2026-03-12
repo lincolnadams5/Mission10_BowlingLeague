@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Mission 10 — Bowling League
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+IS413 Enterprise Application Development
+Lincoln Adams
 
-Currently, two official plugins are available:
+A full-stack web app that displays bowler and team data from a SQLite database via a .NET 10 REST API and a React/TypeScript frontend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- [Node.js](https://nodejs.org/) (v18 or later)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Setup & Running
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+You need **two terminals** open simultaneously — one for the backend, one for the frontend.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Terminal 1 — Backend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd backend
+dotnet run
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The API will start at `http://localhost:5001`. You should see output like:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+Now listening on: http://localhost:5001
+```
+
+### Terminal 2 — Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The React app will start at `http://localhost:5173`.
+
+---
+
+## Viewing the App
+
+Open your browser and go to:
+
+```
+http://localhost:5173
+```
+
+The page displays a table of all bowlers in the league, including their team name, address, and contact info pulled live from the database.
+
+---
+
+## Project Structure
+
+```
+Mission10_BowlingLeague/
+├── backend/
+│   ├── Controllers/        # BowlersController — GET /api/bowlers
+│   ├── Data/               # EF Core DbContext
+│   ├── Models/             # Bowler and Team models
+│   ├── data/               # BowlingLeague.sqlite (included)
+│   └── Program.cs          # App configuration, CORS, DB connection
+└── frontend/
+    ├── src/
+    │   ├── components/     # BowlerTable, Heading, Footer
+    │   ├── services/       # bowlerApi.ts — fetch logic
+    │   └── types/          # Bowler TypeScript type
+    └── .env                # API URL (pre-configured)
+```
+
+---
+
+## Notes
+
+- The SQLite database is included in the repo — no migrations or seeding needed.
+- The `.env` file is pre-configured to point at `http://localhost:5001/api/bowlers`.
+- If the backend starts on a different port, update `VITE_API_URL` in `frontend/.env` and restart `npm run dev`.
