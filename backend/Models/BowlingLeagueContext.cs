@@ -1,7 +1,6 @@
-using Microsoft.EntityFrameworkCore
-using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace backend.Data
+namespace backend.Models
 {
     public class BowlingLeagueContext : DbContext
     {
@@ -10,5 +9,6 @@ namespace backend.Data
         }
 
         public DbSet<Bowler> Bowlers { get; set; }
+        public DbSet<Team> Teams { get; set; }
     }
 }

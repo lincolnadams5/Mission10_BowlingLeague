@@ -2,6 +2,17 @@ namespace backend.Models
 {
     public class Bowler
     {
-        // Fill in Bowler properties matcing SQL table columns
+        public int BowlerID { get; set; }
+        public required string BowlerFirstName { get; set; }
+        public required string BowlerLastName { get; set; }
+        public string? BowlerMiddleInit { get; set; }
+        public required string BowlerAddress { get; set; }
+        public required string BowlerCity { get; set; }
+        public required string BowlerState { get; set; }
+        public required string BowlerZip { get; set; }
+        public required string BowlerPhoneNumber { get; set; }
+        public int TeamID { get; set; }
+        public Team? Team { get; set; }
+
     }
 }

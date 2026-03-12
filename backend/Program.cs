@@ -1,4 +1,4 @@
-using backend.Data;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<BowlingLeagueContext>(options =>
-    options.UseSqlite("Data Source=data/BowlingLeague.sqlite"));
+    options.UseSqlite("Data Source=BowlingLeague.sqlite"));
 
 var app = builder.Build();
 
